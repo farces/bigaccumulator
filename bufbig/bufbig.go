@@ -15,7 +15,7 @@ type BigAccumulator struct {
 	val   *big.Int
 }
 
-//add an int to a bigint, buffers additions and flushes when overflow detected
+//add an int to a bigint, buffers additions and flushes when overflow or underflow detected
 func (x *BigAccumulator) AddInt(y int) *BigAccumulator {
 	if x.val == nil {
 		x.val = new(big.Int)
