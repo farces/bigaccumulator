@@ -5,14 +5,14 @@ import (
 )
 
 /* basic big.Int wrapper with an intermediary int64 accumulator */
-type BufferedInt struct {
+type BigAccumulator struct {
     t int64
     dirty bool
 	Val *big.Int
 }
 
 //add an int to a bigint, buffers additions and flushes when overflow detected
-func (z *BufferedInt) AddInt(y int) *BufferedInt {
+func (z *BigAccumulator) AddInt(y int) *BigAccumulator {
     if (z.t >= (9223372036854775807 - int64(y)))  { z.flush() }
     z.t = z.t+int64(y)
     z.dirty = true
@@ -20,7 +20,7 @@ func (z *BufferedInt) AddInt(y int) *BufferedInt {
 }
 
 //flush value from z.t to val (big.Int)
-func (z *BufferedInt) flush() {
+func (z *BigAccumulator) flush() {
     if !z.dirty { return }
     z.Val.Add(z.Val, big.NewInt(z.t))
     z.t = 0
@@ -28,7 +28,7 @@ func (z *BufferedInt) flush() {
 }
 
 //returns underlying big.Int value, after flushing any buffered value
-func (z *BufferedInt) Value() *big.Int {
+func (z *BigAccumulator) Value() *big.Int {
     if z.dirty { z.flush() }
     return z.Val
 }
