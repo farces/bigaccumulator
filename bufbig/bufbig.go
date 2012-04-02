@@ -11,9 +11,11 @@ type BigAccumulator struct {
 	Val   *big.Int
 }
 
+const INT64_MAX int64 = 9223372036854775807
+
 //add an int to a bigint, buffers additions and flushes when overflow detected
 func (z *BigAccumulator) AddInt(y int) *BigAccumulator {
-	if z.t >= (9223372036854775807 - int64(y)) {
+	if z.t >= (INT64_MAX - int64(y)) {
 		z.flush()
 	}
 	z.t = z.t + int64(y)
