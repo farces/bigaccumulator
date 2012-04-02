@@ -1,6 +1,6 @@
 A bunch of dumb packages for doing dumb things.
 
-bufint: wrapper for big.Int to be used for accumulators, with intermediary values buffered and flushed only when necessary.
+bufbig.BigAccumulator: wrapper for big.Int to be used for accumulators, with intermediary values buffered and flushed only when necessary.
 usage: 
 x := bufint.BigAccumulator{Val:new(big.Int)}
 x.AddInt(12345)
@@ -13,4 +13,4 @@ This allows big.Int accumulators without the overhead of having to cast from int
 
 See bufbig_example.go
 
-NOTE: Only implements AddInt method, as it's purpose is for incremental accumulators.
+NOTE: Only implements AddInt method, as it's purpose is for incremental accumulators. Pass negative values if necessary, checking is implemented to ensure no underflows.
