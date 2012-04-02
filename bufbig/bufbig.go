@@ -11,17 +11,17 @@ import (
    exceed max int64 size. 
 */
 type BigAccumulator struct {
-	t_acc     int64 //intermediate acc
-	val       *big.Int
+	t_acc int64 //intermediate acc
+	val   *big.Int
 }
 
 //add an int to a bigint, buffers additions and flushes when overflow detected
 func (x *BigAccumulator) AddInt(y int) *BigAccumulator {
-    if x.val == nil {
-        x.val = new(big.Int)
-    }
+	if x.val == nil {
+		x.val = new(big.Int)
+	}
 
-    n := int64(y)
+	n := int64(y)
 	if y > 0 && (x.t_acc > (math.MaxInt64 - n)) {
 		x.flush()
 	} else if y < 0 && (x.t_acc < (math.MinInt64 - n)) {
@@ -33,9 +33,9 @@ func (x *BigAccumulator) AddInt(y int) *BigAccumulator {
 
 func (x *BigAccumulator) flush() {
 	if x.t_acc == 0 {
-        return
-    }
-    x.val.Add(x.val, big.NewInt(x.t_acc))
+		return
+	}
+	x.val.Add(x.val, big.NewInt(x.t_acc))
 	x.t_acc = 0
 }
 
