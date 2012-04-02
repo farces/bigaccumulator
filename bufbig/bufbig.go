@@ -12,18 +12,18 @@ type BigAccumulator struct {
 	Val   *big.Int
 }
 
-
 //add an int to a bigint, buffers additions and flushes when overflow detected
 func (z *BigAccumulator) AddInt(y int) *BigAccumulator {
-	if z.t >= (math.MaxInt64 - int64(y)) {
-		z.flush()
-	}
+	if y > 0 && (z.t > (math.MaxInt64 - int64(y))) { 
+        z.flush() 
+    } else if y < 0 && (z.t < (math.MinInt64 - int64(y))) { 
+        z.flush() 
+    }
 	z.t = z.t + int64(y)
 	z.dirty = true
 	return z
 }
 
-//flush value from z.t to val (big.Int)
 func (z *BigAccumulator) flush() {
 	if !z.dirty {
 		return
