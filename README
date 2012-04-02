@@ -1,0 +1,14 @@
+A bunch of dumb packages for doing dumb things.
+
+bufint: wrapper for big.Int to be used for accumulators.
+usage: 
+x := bufint.BufferedInt{Val:new(big.Int)}
+x.AddInt(12345)
+fmt.Println(x.Value())
+
+bufint.Value() returns the underlying big.Int, which can be passed to functions requiring explicit big.Int
+bufint.AddInt(y int) will add the value y to an internal accumulator, which is flushed when .Value() is requested or when an overflow would occur.
+
+This allows big.Int accumulators without the overhead of having to cast from int->int64->big.Int each time a small value is added.
+
+See bufbig_example.go
