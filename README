@@ -1,6 +1,6 @@
 A bunch of dumb packages for doing dumb things.
 
-bufbig.BigAccumulator: wrapper for big.Int to be used for accumulators, with intermediary values buffered and flushed only when necessary.
+bufbig.BigAccumulator: wrapper for big.Int to be used for accumulators, with intermediate values buffered and flushed only when necessary.
 usage: 
 x := new(bufbig.BigAccumulator)
 x.AddInt(12345)

@@ -5,7 +5,7 @@ import (
 	"math/big"
 )
 
-/* Wrapper for big.Int addition, implementing an intermediary accumulator to improve
+/* Wrapper for big.Int addition, implementing an intermediate accumulator to improve
    performance where an accumulator with possible size > math.MaxInt64 is required. 
    Flushes t_acc buffer when Value() is requested, or when addition could potentially
    exceed max int64 size. 
