@@ -12,7 +12,6 @@ import (
 */
 type BigAccumulator struct {
 	t_acc     int64 //intermediate acc
-	req_flush bool  //is flush required?
 	val       *big.Int
 }
 
@@ -29,22 +28,20 @@ func (x *BigAccumulator) AddInt(y int) *BigAccumulator {
 		x.flush()
 	}
 	x.t_acc = x.t_acc + n
-	x.req_flush = true
 	return x
 }
 
 func (x *BigAccumulator) flush() {
-	if !x.req_flush {
-		return
-	}
-	x.val.Add(x.val, big.NewInt(x.t_acc))
+	if x.t_acc == 0 {
+        return
+    }
+    x.val.Add(x.val, big.NewInt(x.t_acc))
 	x.t_acc = 0
-	x.req_flush = false
 }
 
 //returns underlying big.Int value, after flushing any buffered value
 func (x *BigAccumulator) Value() *big.Int {
-	if x.req_flush {
+	if x.t_acc != 0 {
 		x.flush()
 	}
 	return x.val
