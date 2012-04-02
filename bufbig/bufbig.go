@@ -1,7 +1,7 @@
 package bufbig
 
 import (
-    "math"
+	"math"
 	"math/big"
 )
 
@@ -14,11 +14,11 @@ type BigAccumulator struct {
 
 //add an int to a bigint, buffers additions and flushes when overflow detected
 func (z *BigAccumulator) AddInt(y int) *BigAccumulator {
-	if y > 0 && (z.t > (math.MaxInt64 - int64(y))) { 
-        z.flush() 
-    } else if y < 0 && (z.t < (math.MinInt64 - int64(y))) { 
-        z.flush() 
-    }
+	if y > 0 && (z.t > (math.MaxInt64 - int64(y))) {
+		z.flush()
+	} else if y < 0 && (z.t < (math.MinInt64 - int64(y))) {
+		z.flush()
+	}
 	z.t = z.t + int64(y)
 	z.dirty = true
 	return z
