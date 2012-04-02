@@ -1,4 +1,4 @@
-package dumb
+package bufbig
 
 import (
 	"math/big"
