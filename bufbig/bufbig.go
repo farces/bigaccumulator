@@ -42,15 +42,6 @@ func (x *BigAccumulator) flush() {
 	x.req_flush = false
 }
 
-/*
-func (x *BigAccumulator) Init() *BigAccumulator {
-	if x.val == nil {
-		x.val = new(big.Int)
-	}
-	return x
-} 
-*/
-
 //returns underlying big.Int value, after flushing any buffered value
 func (x *BigAccumulator) Value() *big.Int {
 	if x.req_flush {
