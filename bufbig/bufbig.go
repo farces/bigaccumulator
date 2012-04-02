@@ -14,12 +14,13 @@ type BigAccumulator struct {
 
 //add an int to a bigint, buffers additions and flushes when overflow detected
 func (z *BigAccumulator) AddInt(y int) *BigAccumulator {
-	if y > 0 && (z.t > (math.MaxInt64 - int64(y))) {
+    n := int64(y)
+    if y > 0 && (z.t > (math.MaxInt64 - n)) {
 		z.flush()
-	} else if y < 0 && (z.t < (math.MinInt64 - int64(y))) {
+	} else if y < 0 && (z.t < (math.MinInt64 - n)) {
 		z.flush()
 	}
-	z.t = z.t + int64(y)
+	z.t = z.t + n
 	z.dirty = true
 	return z
 }
