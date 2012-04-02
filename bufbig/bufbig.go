@@ -18,7 +18,11 @@ type BigAccumulator struct {
 
 //add an int to a bigint, buffers additions and flushes when overflow detected
 func (x *BigAccumulator) AddInt(y int) *BigAccumulator {
-	n := int64(y)
+    if x.val == nil {
+        x.val = new(big.Int)
+    }
+
+    n := int64(y)
 	if y > 0 && (x.t_acc > (math.MaxInt64 - n)) {
 		x.flush()
 	} else if y < 0 && (x.t_acc < (math.MinInt64 - n)) {
@@ -38,12 +42,14 @@ func (x *BigAccumulator) flush() {
 	x.req_flush = false
 }
 
+/*
 func (x *BigAccumulator) Init() *BigAccumulator {
 	if x.val == nil {
 		x.val = new(big.Int)
 	}
 	return x
-}
+} 
+*/
 
 //returns underlying big.Int value, after flushing any buffered value
 func (x *BigAccumulator) Value() *big.Int {
