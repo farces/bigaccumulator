@@ -13,7 +13,7 @@ import (
 type BigAccumulator struct {
 	t_acc     int64 //intermediate acc
 	req_flush bool  //is flush required?
-	Val       *big.Int
+	val       *big.Int
 }
 
 //add an int to a bigint, buffers additions and flushes when overflow detected
@@ -33,14 +33,14 @@ func (x *BigAccumulator) flush() {
 	if !x.req_flush {
 		return
 	}
-	x.Val.Add(x.Val, big.NewInt(x.t_acc))
+	x.val.Add(x.val, big.NewInt(x.t_acc))
 	x.t_acc = 0
 	x.req_flush = false
 }
 
 func (x *BigAccumulator) Init() *BigAccumulator {
-    if x.Val == nil {
-        x.Val = new(big.Int)
+    if x.val == nil {
+        x.val = new(big.Int)
     }
     return x
 }
@@ -49,5 +49,5 @@ func (x *BigAccumulator) Value() *big.Int {
 	if x.req_flush {
 		x.flush()
 	}
-	return x.Val
+	return x.val
 }
