@@ -5,7 +5,11 @@ import (
 	"math/big"
 )
 
-/* basic big.Int wrapper with an intermediary int64 accumulator */
+/* Wrapper for big.Int addition, implementing an intermediary accumulator to improve
+   performance where an accumulator with possible size > math.MaxInt64 is required. 
+   Flushes t_acc buffer when Value() is requested, or when addition could potentially
+   exceed max int64 size. 
+*/
 type BigAccumulator struct {
 	t_acc     int64 //intermediate acc
 	req_flush bool  //is flush required?
