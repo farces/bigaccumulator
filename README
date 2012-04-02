@@ -1,6 +1,6 @@
 A bunch of dumb packages for doing dumb things.
 
-bufint: wrapper for big.Int to be used for accumulators.
+bufint: wrapper for big.Int to be used for accumulators, with intermediary values buffered and flushed only when necessary.
 usage: 
 x := bufint.BigAccumulator{Val:new(big.Int)}
 x.AddInt(12345)
