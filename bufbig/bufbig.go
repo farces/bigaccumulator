@@ -7,8 +7,8 @@ import (
 
 /* basic big.Int wrapper with an intermediary int64 accumulator */
 type BigAccumulator struct {
-	t     int64
-	dirty bool
+	t     int64 //intermediate acc
+	dirty bool  //is flush required?
 	Val   *big.Int
 }
 
