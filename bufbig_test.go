@@ -40,7 +40,7 @@ func TestBigAccumulatorSetValue(t *testing.T) {
 	v.SetValue("12345654321", 10)
 
 	if v.Value().String() != out.String() {
-		t.Errorf("Addition: 2 + 8 = %v, want %v", v.Value().String(), out.String())
+		t.Errorf("SetValue(\"12345654321\",10) = %v, want %v", v.Value().String(), out.String())
 	}
 }
 
