@@ -7,7 +7,7 @@ import (
 
 func main() {
 	//x := new(bufbig.BigAccumulator)
-    x := bufbig.BigAccumulator.New()
+    x := bufbig.NewBigAccumulator()
     for y := 0; y < 1000000; y++ {
 		x.AddInt(1)
 	}
