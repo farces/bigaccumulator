@@ -12,13 +12,13 @@ import (
 */
 type BigAccumulator struct {
 	t_acc int64 //intermediate acc
-	val   *big.Int
+	Val   *big.Int
 }
 
 //add an int to a bigint, buffers additions and flushes when overflow or underflow detected
 func (x *BigAccumulator) AddInt(y int) *BigAccumulator {
-	if x.val == nil {
-		x.val = new(big.Int)
+	if x.Val == nil {
+		x.Val = new(big.Int)
 	}
 
 	n := int64(y)
@@ -35,14 +35,14 @@ func (x *BigAccumulator) flush() {
 	if x.t_acc == 0 {
 		return
 	}
-	x.val.Add(x.val, big.NewInt(x.t_acc))
+	x.Val.Add(x.val, big.NewInt(x.t_acc))
 	x.t_acc = 0
 }
 
-//returns underlying big.Int value, after flushing any buffered value
+//returns underlying big.Int Value, after flushing any buffered value
 func (x *BigAccumulator) Value() *big.Int {
 	if x.t_acc != 0 {
 		x.flush()
 	}
-	return x.val
+	return x.Val
 }
