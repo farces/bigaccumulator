@@ -10,7 +10,7 @@ import (
 func TestBigAccumulatorAdd(t *testing.T) {
 	out := big.NewInt(int64(10))
 
-	v := new(bufbig.BigAccumulator)
+	v := bufbig.NewBigAccumulator()
 	v.AddInt(2)
 	v.AddInt(8)
 
@@ -23,7 +23,7 @@ func TestBigAccumulatorAdd(t *testing.T) {
 func TestBigAccumulatorSub(t *testing.T) {
 	out := big.NewInt(int64(-10))
 
-	v := new(bufbig.BigAccumulator)
+	v := bufbig.NewBigAccumulator()
 	v.AddInt(2)
 	v.AddInt(-12)
 
@@ -36,8 +36,8 @@ func TestBigAccumulatorSub(t *testing.T) {
 func TestBigAccumulatorSetValue(t *testing.T) {
 	out := big.NewInt(int64(12345654321))
 
-	v := new(bufbig.BigAccumulator)
-	v.SetValue("12345654321", 10)
+    v := bufbig.NewBigAccumulator()
+    v.SetValue("12345654321", 10)
 
 	if v.Value().String() != out.String() {
 		t.Errorf("SetValue(\"12345654321\",10) = %v, want %v", v.Value().String(), out.String())
@@ -46,10 +46,10 @@ func TestBigAccumulatorSetValue(t *testing.T) {
 
 //reset test
 func TestBigAccumulatorReset(t *testing.T) {
-	out := new(bufbig.BigAccumulator)
+	out := bufbig.NewBigAccumulator()
 
-	v := new(bufbig.BigAccumulator)
-	v.AddInt(10)
+    v := bufbig.NewBigAccumulator()
+    v.AddInt(10)
 	v.Reset()
 
 	if v.Value().String() != out.Value().String() {
@@ -61,8 +61,8 @@ func TestBigAccumulatorReset(t *testing.T) {
 func TestBigAccumulatorOverflow(t *testing.T) {
 	out, _ := new(big.Int).SetString("9223372036854775808", 10)
 
-	v := new(bufbig.BigAccumulator)
-	v.SetValue("9223372036854775807", 10)
+    v := bufbig.NewBigAccumulator()
+    v.SetValue("9223372036854775807", 10)
 	v.AddInt(1)
 
 	if v.Value().String() != out.String() {
@@ -74,7 +74,7 @@ func TestBigAccumulatorOverflow(t *testing.T) {
 func TestBigAccumulatorUnderflow(t *testing.T) {
 	out, _ := new(big.Int).SetString("-9223372036854775808", 10)
 
-	v := new(bufbig.BigAccumulator)
+	v := bufbig.NewBigAccumulator()
 	v.SetValue("-9223372036854775807", 10)
 	v.AddInt(-1)
 
