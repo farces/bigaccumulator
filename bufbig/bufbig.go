@@ -41,9 +41,9 @@ func (x *BigAccumulator) flush() {
 
 //accessor for big.Int.SetString(s,base)
 func (x *BigAccumulator) SetValue(s string, base int) *BigAccumulator {
-    x.t_acc=0
-    x.val,_ = new(big.Int).SetString(s,base)
-    return x
+	x.t_acc = 0
+	x.val, _ = new(big.Int).SetString(s, base)
+	return x
 }
 
 //returns underlying big.Int Value, after flushing any buffered value
