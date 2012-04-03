@@ -51,8 +51,8 @@ func TestBigAccumulatorReset(t *testing.T) {
     v.AddInt(10)
     v.Reset()
 
-    if v.Value().String() != out.String() {
-        t.Errorf("Reset() = %v, want %v", v.Value().String(), out.String())
+    if v.Value().String() != out.Value().String() {
+        t.Errorf("Reset() = %v, want %v", v.Value().String(), out.Value().String())
     }
 }
 
