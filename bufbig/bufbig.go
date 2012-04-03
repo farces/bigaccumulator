@@ -45,8 +45,8 @@ func (x *BigAccumulator) SetValue(s string, base int) {
 }
 
 func (x *BigAccumulator) Reset() {
-    x.t_acc = 0
-    x.val = new(big.Int)
+	x.t_acc = 0
+	x.val = new(big.Int)
 }
 
 //returns underlying big.Int Value, after flushing any buffered value
@@ -54,8 +54,8 @@ func (x *BigAccumulator) Value() *big.Int {
 	if x.t_acc != 0 {
 		x.flush()
 	}
-    if x.val == nil {
-        x.val = new(big.Int)
-    }
+	if x.val == nil {
+		x.val = new(big.Int)
+	}
 	return x.val
 }

@@ -46,14 +46,14 @@ func TestBigAccumulatorSetValue(t *testing.T) {
 
 //reset test
 func TestBigAccumulatorReset(t *testing.T) {
-    out := new(bufbig.BigAccumulator)
-    v := new(bufbig.BigAccumulator)
-    v.AddInt(10)
-    v.Reset()
+	out := new(bufbig.BigAccumulator)
+	v := new(bufbig.BigAccumulator)
+	v.AddInt(10)
+	v.Reset()
 
-    if v.Value().String() != out.Value().String() {
-        t.Errorf("Reset() = %v, want %v", v.Value().String(), out.Value().String())
-    }
+	if v.Value().String() != out.Value().String() {
+		t.Errorf("Reset() = %v, want %v", v.Value().String(), out.Value().String())
+	}
 }
 
 //int64 overflow test
