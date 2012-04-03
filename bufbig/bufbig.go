@@ -54,5 +54,8 @@ func (x *BigAccumulator) Value() *big.Int {
 	if x.t_acc != 0 {
 		x.flush()
 	}
+    if x.val == nil {
+        x.val = new(big.Int)
+    }
 	return x.val
 }
