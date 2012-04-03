@@ -47,6 +47,7 @@ func TestBigAccumulatorSetValue(t *testing.T) {
 //reset test
 func TestBigAccumulatorReset(t *testing.T) {
 	out := new(bufbig.BigAccumulator)
+
 	v := new(bufbig.BigAccumulator)
 	v.AddInt(10)
 	v.Reset()
