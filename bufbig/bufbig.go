@@ -15,7 +15,7 @@ type BigAccumulator struct {
 	val   *big.Int
 }
 
-func (x *BigAccumulator) New() *BigAccumulator {
+func NewBigAccumulator() *BigAccumulator {
     return &BigAccumulator{val: new(big.Int)}
 }
 
