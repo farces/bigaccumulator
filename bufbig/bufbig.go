@@ -35,7 +35,7 @@ func (x *BigAccumulator) flush() {
 	if x.t_acc == 0 {
 		return
 	}
-	x.Val.Add(x.val, big.NewInt(x.t_acc))
+	x.Val.Add(x.Val, big.NewInt(x.t_acc))
 	x.t_acc = 0
 }
 
