@@ -21,9 +21,6 @@ func NewBigAccumulator() *BigAccumulator {
 
 //add an int to a bigint, buffers additions and flushes when overflow or underflow detected
 func (x *BigAccumulator) AddInt(y int) {
-	if x.val == nil {
-		x.val = new(big.Int)
-	}
 	n := int64(y)
 	if y > 0 && (x.t_acc > (math.MaxInt64 - n)) {
 		x.flush()
@@ -34,6 +31,9 @@ func (x *BigAccumulator) AddInt(y int) {
 }
 
 func (x *BigAccumulator) flush() {
+	if x.val == nil {
+		x.val = new(big.Int)
+	}
 	if x.t_acc == 0 {
 		return
 	}
@@ -59,11 +59,11 @@ func (x *BigAccumulator) Reset() {
 
 //returns underlying big.Int Value, after flushing any buffered value
 func (x *BigAccumulator) Value() *big.Int {
-	if x.val == nil {
-        x.val = new(big.Int)
-    }
-    if x.t_acc != 0 {
+	if x.t_acc != 0 {
 		x.flush()
+	}
+	if x.val == nil {
+		x.val = new(big.Int)
 	}
 	return x.val
 }
