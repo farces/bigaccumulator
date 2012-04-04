@@ -45,11 +45,12 @@ func (x *BigAccumulator) flush() {
 
 //accessor for big.Int.SetString(s,base)
 func (x *BigAccumulator) SetValue(s string, base int) {
+    defer func() { recover() }()
 	x.t_acc = 0
 	val, status := new(big.Int).SetString(s, base)
 	if status == false {
 		panic(fmt.Sprintf("Could not set value %v",s))
-	}
+    }
 	x.val = val
 }
 
