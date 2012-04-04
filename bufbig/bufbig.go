@@ -1,7 +1,6 @@
 package bufbig
 
 import (
-    "fmt"
 	"math"
 	"math/big"
 )
@@ -44,14 +43,15 @@ func (x *BigAccumulator) flush() {
 }
 
 //accessor for big.Int.SetString(s,base)
-func (x *BigAccumulator) SetValue(s string, base int) {
-    defer func() { recover() }()
-	x.t_acc = 0
+func (x *BigAccumulator) SetValue(s string, base int) bool {
 	val, status := new(big.Int).SetString(s, base)
 	if status == false {
-		panic(fmt.Sprintf("Could not set value %v",s))
-    }
+		return false
+	}
+
+	x.t_acc = 0
 	x.val = val
+	return true
 }
 
 func (x *BigAccumulator) Reset() {

@@ -2,6 +2,7 @@ package main
 
 import (
 	"github.com/farces/dumb/bufbig"
+	//"./bufbig"
 	"math/big"
 	"testing"
 )
@@ -41,6 +42,25 @@ func TestBigAccumulatorSetValue(t *testing.T) {
 
 	if v.Value().String() != out.String() {
 		t.Errorf("SetValue(\"12345654321\",10) = %v, want %v", v.Value().String(), out.String())
+	}
+}
+
+//setvalue invalid value test
+func TestBigAccumulatorSetValueInvalid(t *testing.T) {
+	out := big.NewInt(int64(1))
+
+	v := bufbig.NewBigAccumulator()
+	v.AddInt(1)
+	res := v.SetValue("boobs", 10)
+
+	//expecting SetValue to pass SetString success result back
+	if res != false {
+		t.Errorf("SetValue Invalid = true, want false")
+	}
+
+	//checking to make sure original value persists
+	if v.Value().String() != out.String() {
+		t.Errorf("SetValue(\"boobs\",10) = %v, want %v", v.Value().String(), out.String())
 	}
 }
 
