@@ -45,10 +45,10 @@ func (x *BigAccumulator) flush() {
 //accessor for big.Int.SetString(s,base)
 func (x *BigAccumulator) SetValue(s string, base int) {
 	x.t_acc = 0
-	x.val,err = new(big.Int).SetString(s, base)
-    if err != nil {
-        panic(err)
-    }
+	x.val, err = new(big.Int).SetString(s, base)
+	if err != nil {
+		panic(err)
+	}
 }
 
 func (x *BigAccumulator) Reset() {
