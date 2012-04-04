@@ -24,7 +24,6 @@ func (x *BigAccumulator) AddInt(y int) {
 	if x.val == nil {
 		x.val = new(big.Int)
 	}
-
 	n := int64(y)
 	if y > 0 && (x.t_acc > (math.MaxInt64 - n)) {
 		x.flush()
@@ -48,7 +47,6 @@ func (x *BigAccumulator) SetValue(s string, base int) bool {
 	if status == false {
 		return false
 	}
-
 	x.t_acc = 0
 	x.val = val
 	return true
@@ -61,11 +59,11 @@ func (x *BigAccumulator) Reset() {
 
 //returns underlying big.Int Value, after flushing any buffered value
 func (x *BigAccumulator) Value() *big.Int {
-	if x.t_acc != 0 {
-		x.flush()
-	}
 	if x.val == nil {
-		x.val = new(big.Int)
+        x.val = new(big.Int)
+    }
+    if x.t_acc != 0 {
+		x.flush()
 	}
 	return x.val
 }
