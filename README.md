@@ -21,7 +21,7 @@ This package allows big.Int accumulators without the overhead of having to cast 
 `fmt.Println(x)`<br>
 with<br>
 `x := bufbig.NewBigAccumulator`<br>
-`x.Add(y)`<br>
+`x.AddInt(y)`<br>
 `fmt.Println(x.Value())`<br>
 
 See bufbig_example.go
