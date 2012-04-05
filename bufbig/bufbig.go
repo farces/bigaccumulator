@@ -16,7 +16,7 @@ type BigAccumulator struct {
 }
 
 func NewBigAccumulator() *BigAccumulator {
-	return &BigAccumulator{val: new(big.Int)}
+	return &BigAccumulator{val: big.NewInt(0)}
 }
 
 //add an int to a bigint, buffers additions and flushes when overflow or underflow detected
@@ -32,7 +32,7 @@ func (x *BigAccumulator) AddInt(y int) {
 
 func (x *BigAccumulator) flush() {
 	if x.val == nil {
-		x.val = new(big.Int)
+		x.val = big.NewInt(0)
 	}
 	if x.t_acc == 0 {
 		return
@@ -54,7 +54,7 @@ func (x *BigAccumulator) SetValue(s string, base int) bool {
 
 func (x *BigAccumulator) Reset() {
 	x.t_acc = 0
-	x.val = new(big.Int)
+	x.val = big.NewInt(0)
 }
 
 //returns underlying big.Int Value, after flushing any buffered value
@@ -63,7 +63,7 @@ func (x *BigAccumulator) Value() *big.Int {
 		x.flush()
 	}
 	if x.val == nil {
-		x.val = new(big.Int)
+		x.val = big.NewInt(0)
 	}
 	return x.val
 }
