@@ -42,7 +42,7 @@ func (x *BigAccumulator) flush() {
 }
 
 //accessor for big.Int.SetString(s,base)
-func (x *BigAccumulator) SetValue(s string, base int) bool {
+func (x *BigAccumulator) SetString(s string, base int) bool {
 	val, status := new(big.Int).SetString(s, base)
 	if status == false {
 		return false
@@ -50,6 +50,11 @@ func (x *BigAccumulator) SetValue(s string, base int) bool {
 	x.t_acc = 0
 	x.val = val
 	return true
+}
+
+func (x *BigAccumulator) SetBigInt(b *big.Int) {
+	x.val = new(big.Int).Set(b)
+	x.t_acc = 0
 }
 
 func (x *BigAccumulator) Reset() {

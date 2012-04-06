@@ -33,25 +33,25 @@ func TestBigAccumulatorSub(t *testing.T) {
 	}
 }
 
-//setvalue test
-func TestBigAccumulatorSetValue(t *testing.T) {
+//setstring test
+func TestBigAccumulatorSetString(t *testing.T) {
 	out := big.NewInt(int64(12345654321))
 
 	v := bufbig.NewBigAccumulator()
-	v.SetValue("12345654321", 10)
+	v.SetString("12345654321", 10)
 
 	if v.Value().String() != out.String() {
 		t.Errorf("SetValue(\"12345654321\",10) = %v, want %v", v.Value().String(), out.String())
 	}
 }
 
-//setvalue invalid value test
-func TestBigAccumulatorSetValueInvalid(t *testing.T) {
+//setstring invalid value test
+func TestBigAccumulatorSetStringInvalid(t *testing.T) {
 	out := big.NewInt(int64(1))
 
 	v := bufbig.NewBigAccumulator()
 	v.AddInt(1)
-	res := v.SetValue("boobs", 10)
+	res := v.SetString("boobs", 10)
 
 	//expecting SetValue to pass SetString success result back
 	if res != false {
@@ -61,6 +61,18 @@ func TestBigAccumulatorSetValueInvalid(t *testing.T) {
 	//checking to make sure original value persists
 	if v.Value().String() != out.String() {
 		t.Errorf("SetValue(\"boobs\",10) = %v, want %v", v.Value().String(), out.String())
+	}
+}
+
+//setbigint test
+func TestBigAccumulatorSetBigInt(t *testing.T) {
+	out := big.NewInt(int64(12345))
+
+	v := bufbig.NewBigAccumulator()
+	v.SetBigInt(big.NewInt(int64(12345)))
+
+	if v.Value().String() != out.String() {
+		t.Errorf("SetBigInt big.NewInt(int64(12345)) = %v, want %v", v.Value().String(), out.String())
 	}
 }
 
@@ -82,7 +94,7 @@ func TestBigAccumulatorOverflow(t *testing.T) {
 	out, _ := new(big.Int).SetString("9223372036854775808", 10)
 
 	v := bufbig.NewBigAccumulator()
-	v.SetValue("9223372036854775807", 10)
+	v.SetString("9223372036854775807", 10)
 	v.AddInt(1)
 
 	if v.Value().String() != out.String() {
@@ -95,7 +107,7 @@ func TestBigAccumulatorUnderflow(t *testing.T) {
 	out, _ := new(big.Int).SetString("-9223372036854775808", 10)
 
 	v := bufbig.NewBigAccumulator()
-	v.SetValue("-9223372036854775807", 10)
+	v.SetString("-9223372036854775807", 10)
 	v.AddInt(-1)
 
 	if v.Value().String() != out.String() {
