@@ -7,7 +7,8 @@ BigAccumulator is a wrapper for big.Int to be used for accumulators, with interm
 ```go
 x := bufbig.NewBigAccumulator()
 x.AddInt(12345)
-fmt.Println(x.Value())```<br>
+fmt.Println(x.Value())
+```
 
 <b>NewBigAccumulator()</b> creates a new accumulator with members set to their zero values (rather than nil). Use this rather than `new(bufbig.BigAccumulator)` where possible.<br>
 <b>Value()</b> returns the underlying big.Int, which can be passed to functions requiring a big.Int explicitly.<br>
@@ -21,11 +22,13 @@ This package allows big.Int accumulators without the overhead of having to cast 
 ```go
 x := big.NewInt(0)
 x.Add(x,big.NewInt(int64(y)))
-fmt.Println(x)```
+fmt.Println(x)
+```
 with<br>
 ```go
 x := bufbig.NewBigAccumulator()
 x.AddInt(y)
-fmt.Println(x.Value())```
+fmt.Println(x.Value())
+```
 
 See bufbig_example.go
