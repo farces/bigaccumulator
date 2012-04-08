@@ -19,6 +19,7 @@ fmt.Println(x.Value())
 
 ## Uses
 This package allows big.Int accumulators without the overhead of having to cast from int->int64->big.Int each time a small value is added. Replaces:<br>
+
 ```go
 x := big.NewInt(0)
 x.Add(x,big.NewInt(int64(y)))
@@ -26,6 +27,7 @@ fmt.Println(x)
 ```
 
 with<br>
+
 ```go
 x := bufbig.NewBigAccumulator()
 x.AddInt(y)
